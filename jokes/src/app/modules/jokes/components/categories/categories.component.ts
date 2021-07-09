@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Categories, Category } from '../../models/categories.model';
 import { DataSharedService } from '../../services/data-shared.service';
-import { JokesService } from '../../services/jokes.service';
+import { IJokesService } from '../../services/jokes.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     private subscription$: Subscription = new Subscription;
     categories: Category[] = [];
     
-    constructor(private JokesService: JokesService,
+    constructor(private JokesService: IJokesService,
         private DataSharedService: DataSharedService,
         private router: Router) { }
 
