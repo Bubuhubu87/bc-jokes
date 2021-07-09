@@ -1,13 +1,12 @@
 <div id="JokeDetails">
-    <nav>
+    <nav class="navigation-bar">
         <button type="button" class="btn btn-default btn-navigation" (click)="returnToCategories()"
             aria-label="Left Align">&#8592;</button>
     </nav>
     <div class="content" *ngIf='joke'>
         <section><img [src]='joke.IconUrl' /></section>
         <hr>
-        <article>{{joke.Value}}</article>
-        <hr>
+        <article class="joke-text">{{joke.Value}}</article>
         <button type="button" class="btn btn-default btn-primary mobile-button custom-button" (click)="getRandomJoke()"
             aria-label="get another joke">Another one</button>
     </div>

@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* Importing Bootstrap SCSS file. */
+@import "~src/styles/_configuration";
 @import "~bootstrap/scss/bootstrap";
 
 html,
@@ -9,21 +7,31 @@ body {
 }
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-
 #MainPage {
-    max-width: 700px;
-    padding: 20px 10px;
+    padding: 0 10px;
 
     .site-logo {
+        background-color: $gray;
+        height: 4rem;
         display: flex;
         justify-content: center;
+        .title {
+            align-self: center;
+        }
+    }
+
+    .content {
+        min-height: calc(100vh - 7rem);
     }
 
     .site-footer {
+        background-color: $gray;
+        height: 3rem;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
 }

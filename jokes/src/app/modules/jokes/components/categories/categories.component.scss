@@ -5,12 +5,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 1rem;
     @include media-breakpoint-down(xs) {
         align-items: unset;
     }
     .custom-button {
         background-color: $orange;
-        width: 100px;
+        width: 10rem;
         @include mobile-button;
 
         &:hover {
