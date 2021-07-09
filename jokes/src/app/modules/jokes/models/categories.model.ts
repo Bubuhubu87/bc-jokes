@@ -1,8 +1,8 @@
 export class Categories {
-    Categories: Category[];
+    Categories: Category[] = [];
 
-    constructor(categories: Category[]) {
-        this.Categories = categories;
+    constructor(category: Category[]) {
+        this.Categories = category;
     }
 }
 

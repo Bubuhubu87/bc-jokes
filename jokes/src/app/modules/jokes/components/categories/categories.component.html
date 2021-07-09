@@ -1,1 +1,8 @@
-Categories
+<div id="Categories" *ngIf='categories'>
+    <div class="" aria-label="...">
+        <div *ngFor='let category of categories'>
+            <button class="btn btn-primary custom-button" (click)="getJokeDetailsBy(category)">{{category.Name}}</button>
+            <hr>
+        </div>
+    </div>
+</div>

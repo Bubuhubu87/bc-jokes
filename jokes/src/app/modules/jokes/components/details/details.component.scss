@@ -1,0 +1,27 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~src/styles/_configuration";
+
+#JokeDetails {
+    margin: 0 auto;
+    .btn-navigation {
+        background-color: $ash-grey;
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $gray-900;
+
+        .custom-button {
+            background-color: $orange;
+            border-color: $gray-900;
+            margin-left: auto;
+            @include mobile-button;
+            &:hover {
+                color: $black;
+                background-color: $ash-grey;
+            }
+        }
+    }
+}
