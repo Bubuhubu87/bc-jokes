@@ -9,7 +9,7 @@ import { JokesService } from './services/jokes.service';
 @NgModule({
   declarations: [CategoriesComponent, DetailsComponent],
   imports: [JokesRoutingModule, CommonModule],
-  providers: [JokesService, DataSharedService],
+  providers: [JokesService, DataSharedService ],
   bootstrap: []
 })
 export class JokesModule { }

@@ -1,0 +1,42 @@
+@import "~src/styles/_configuration";
+
+.notification-container {
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    &.absolute {
+        top: 4rem;
+    }
+
+    .notification-bar {
+        position: absolute;
+        width: 100%;
+        max-height: 100px;
+        overflow: hidden;
+
+        animation: showBarAnimationSteps linear 0s 2;
+        @keyframes showBarAnimationSteps {
+            0% {
+                max-height: 0;
+            }
+            50% {
+                max-height: 15em;
+            }
+            100% {
+                max-height: 0;
+            }
+        }
+
+        &.error {
+            background-color: $carousel-pink;
+        }
+        &.success {
+            background-color: $cosmic-latte;
+        }
+
+        .text {
+            padding: 1rem 4rem;
+        }
+    }
+}

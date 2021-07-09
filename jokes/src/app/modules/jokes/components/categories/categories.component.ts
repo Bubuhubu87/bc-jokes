@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Categories, Category } from '../../models/categories.model';
 import { DataSharedService } from '../../services/data-shared.service';
+import { NotificationService } from '../menu-notification-bar/menu-notification.service'
 import { IJokesService } from '../../services/jokes.interface';
 import { Router } from '@angular/router';
 
@@ -18,7 +19,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     
     constructor(private JokesService: IJokesService,
         private DataSharedService: DataSharedService,
-        private router: Router) { }
+        private router: Router,
+        private NotificationService: NotificationService) { }
 
 
     ngOnInit(): void {
@@ -26,9 +28,11 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             (result: Categories) => {
                 if (result) {
                     this.categories = result.Categories;
+                    this.NotificationService.showSuccessNotification('Categories fetched succesfully');
                 }
             },
-            () => {
+            (error) => {
+                this.NotificationService.showErrorNotification(`Some errors occure, please try again ${error}`);
                 console.error('Here we can call some functionality to log errors')
             }
         );
