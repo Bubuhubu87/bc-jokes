@@ -3,7 +3,7 @@ import { ReplaySubject } from "rxjs";
 import { shareReplay } from "rxjs/operators";
 import { Category } from "../models/categories.model";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class DataSharedService {
     private messageSource = new ReplaySubject<Category>(1);
     currentMessage = this.messageSource.asObservable().pipe(shareReplay(1));
