@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 
@@ -10,12 +10,13 @@ export class CacheService {
 
     getCachedObject(key: string): any {
         const value = sessionStorage.getItem(key);
-        if (value)
+        if (value) {
             try {
                 return JSON.parse(value);
             } catch (error) {
                 console.error(`Something went wrong with item parse in ${this.getCachedObject.name} ${error}`);
                 return null;
             }
+        }
     }
 }

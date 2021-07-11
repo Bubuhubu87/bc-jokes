@@ -5,21 +5,21 @@ export class NotificationService {
 
     animationDuration = 3000;
 
-    showSuccessNotification(informationMessage: string) {
+    success(informationMessage: string) {
         this.ShowNotification(false, informationMessage);
     }
 
-    showErrorNotification(informationMessage: string) {
+    failure(informationMessage: string) {
         this.ShowNotification(true, informationMessage);
     }
 
     private ShowNotification(isError: boolean, informationMessage: string) {
         const container = document.getElementById('saveChanges');
         if (container) {
-            container.classList.add("absolute");
+            container.classList.add('absolute');
 
-            const cloneContainer = <HTMLElement>container.cloneNode(true);
-            const notificationBar = <HTMLElement>cloneContainer.firstElementChild;
+            const cloneContainer = container.cloneNode(true) as HTMLElement;
+            const notificationBar = cloneContainer.firstElementChild as HTMLElement;
             const notificationMessage = notificationBar.firstElementChild;
 
             notificationBar.classList.add(isError ? 'error' : 'success');

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Categories, Category } from '../models/categories.model';
 import { Joke } from '../models/joke.model';
-import { JokesService } from './jokes.service';
+import { JokesService } from '../services/jokes.service';
 
 @Injectable({
     providedIn: 'root',

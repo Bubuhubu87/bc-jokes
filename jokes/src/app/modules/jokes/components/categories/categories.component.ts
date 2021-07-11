@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Categories, Category } from '../../models/categories.model';
 import { DataSharedService } from '../../services/data-shared.service';
-import { NotificationService } from '../menu-notification-bar/menu-notification.service'
-import { IJokesService } from '../../services/jokes.interface';
+import { NotificationService } from '../notification-bar/notification.service';
+import { IJokesService } from '../../interfaces/jokes.interface';
 import { Router } from '@angular/router';
 import { CacheService } from '../../services/cache.service';
 
@@ -19,38 +19,42 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     categories: Category[] = [];
 
     constructor(private JokesService: IJokesService,
-        private DataSharedService: DataSharedService,
+        private dataSharedService: DataSharedService,
         private router: Router,
-        private NotificationService: NotificationService,
-        private CacheService: CacheService) { }
+        private notificationService: NotificationService,
+        private cacheService: CacheService) { }
 
 
     ngOnInit(): void {
-        const cachedCategories = this.CacheService.getCachedObject(this.cacheCategories);
+        const cachedCategories = this.cacheService.getCachedObject(this.cacheCategories);
 
         if (cachedCategories) {
             this.categories = cachedCategories;
             return;
         }
 
-        this.subscription$ = this.JokesService.getCategories().subscribe(
-            (result: Categories) => {
-                if (result) {
-                    this.categories = result.Categories;
-                    this.CacheService.setObjectCache(this.cacheCategories, result.Categories);
-                    this.NotificationService.showSuccessNotification('Categories fetched succesfully');
-                }
-            },
+        this.subscription$ = this.JokesService.getCategories().subscribe((result) =>
+            this.fetchCategories(result),
             (error) => {
-                this.NotificationService.showErrorNotification(`Some errors occure, please try again ${error}`);
-                console.error('Here we can call some functionality to log errors')
-            }
-        );
+                this.notificationService.failure(`Some errors occure, please try again ${error}`);
+                console.error(`Here we can call some functionality to log errors`);
+            });
     }
 
     getJokeDetailsBy(category: Category): void {
-        this.DataSharedService.changeMessage(category);
+        this.dataSharedService.changeMessage(category);
         this.router.navigateByUrl('Jokes/Joke');
+    }
+
+    private fetchCategories(categories: Categories): void {
+        if (categories) {
+            this.categories = categories.Categories;
+            this.cacheService.setObjectCache(this.cacheCategories, categories.Categories);
+            this.notificationService.success(`Categories fetched succesfully`);
+        } else {
+            this.notificationService.failure(`Unfortunately we could not fetch data, please try again later`);
+            console.warn(`Here we can call some functionality to log errors`);
+        }
     }
 
     ngOnDestroy(): void {

@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { ReplaySubject } from "rxjs";
-import { shareReplay } from "rxjs/operators";
-import { Category } from "../models/categories.model";
+import { Injectable } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
+import { Category } from '../models/categories.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataSharedService {

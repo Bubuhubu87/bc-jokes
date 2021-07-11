@@ -7,13 +7,12 @@ const routes: Routes = [
     { path: '', redirectTo: '/Jokes/Categories', pathMatch: 'full' },
     { path: 'Categories', component: CategoriesComponent },
     { path: 'Joke', component: DetailsComponent },
-    
-  ];
-  
-  @NgModule({
-      declarations: [],
-      imports: [RouterModule.forChild(routes)],
-      exports: [RouterModule]
-  })
-  
-  export class JokesRoutingModule { }
+];
+
+@NgModule({
+    declarations: [],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
+})
+
+export class JokesRoutingModule { }
