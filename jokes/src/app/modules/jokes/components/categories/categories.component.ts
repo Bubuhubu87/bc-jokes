@@ -7,6 +7,8 @@ import { IJokesService } from '../../interfaces/jokes.interface';
 import { Router } from '@angular/router';
 import { CacheService } from '../../services/cache.service';
 import { Category } from '../../models/category.model';
+import { CategoriesTexts } from '../../const_strings/categories.text';
+import { RoutingStrings } from '../../const_strings/routings.string';
 
 @Component({
     selector: 'app-categories',
@@ -15,7 +17,6 @@ import { Category } from '../../models/category.model';
 })
 
 export class CategoriesComponent implements OnInit, OnDestroy {
-    private cacheCategories = 'categories';
     private subscription$: Subscription = new Subscription;
     categories: Category[] = [];
 
@@ -27,7 +28,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
-        const cachedCategories = this.cacheService.getCachedObject(this.cacheCategories);
+        const cachedCategories = this.cacheService.getCachedObject(CategoriesTexts.CATEGORIES);
 
         if (cachedCategories) {
             this.categories = cachedCategories;
@@ -37,24 +38,24 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         this.subscription$ = this.JokesService.getCategories().subscribe((result) =>
             this.fetchCategories(result),
             (error) => {
-                this.notificationService.failure(`Some errors occure, please try again ${error}`);
-                console.error(`Here we can call some functionality to log errors`);
+                this.notificationService.failure(`${CategoriesTexts.NOTIFY_FAILURE} ${error}`);
+                console.error(CategoriesTexts.LOG_ERROR_TO_DB);
             });
     }
 
     getJokeDetailsBy(category: Category): void {
         this.dataSharedService.changeMessage(category);
-        this.router.navigateByUrl('Jokes/Joke');
+        this.router.navigateByUrl(RoutingStrings.JOKES_JOKE);
     }
 
     private fetchCategories(categories: Categories): void {
         if (categories) {
             this.categories = categories.Categories;
-            this.cacheService.setObjectCache(this.cacheCategories, categories.Categories);
-            this.notificationService.success(`Categories fetched succesfully`);
+            this.cacheService.setObjectCache(CategoriesTexts.CATEGORIES, categories.Categories);
+            this.notificationService.success(CategoriesTexts.NOTIFY_SUCCESS);
         } else {
-            this.notificationService.failure(`Unfortunately we could not fetch data, please try again later`);
-            console.warn(`Here we can call some functionality to log errors`);
+            this.notificationService.failure(CategoriesTexts.NOTIFY_FAILURE_FETCH_DATA);
+            console.warn(CategoriesTexts.LOG_ERROR_TO_DB);
         }
     }
 

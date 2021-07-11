@@ -7,6 +7,8 @@ import { Joke } from '../../models/joke.model';
 import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification-bar/notification.service';
+import { DetailsTexts } from '../../const_strings/details.text';
+import { RoutingStrings } from '../../const_strings/routings.string';
 
 @Component({
     selector: 'app-details',
@@ -36,22 +38,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
         this.subscription$ = this.observableSwitchMap.subscribe((result: Joke) => this.fetchJoke(result),
             (error) => {
-                this.notificationService.failure(`Some errors occure, please try to pick another category`);
+                this.notificationService.failure(DetailsTexts.NOTIFY_FAILURE);
                 this.returnToCategories();
-                console.error(`Here we can call some functionality to log errors ${error}`);
+                console.error(DetailsTexts.LOG_ERROR_TO_DB);
             });
     }
 
     returnToCategories(): void {
-        this.router.navigateByUrl('Jokes/Categories');
+        this.router.navigateByUrl(RoutingStrings.JOKES_CATEGORIES);
     }
 
     private fetchJoke(joke: Joke): void {
         if (joke) {
             this.joke = joke;
-            this.notificationService.success(`Joke with id "${this.joke.Id}" fetch succesfully`);
+            this.notificationService.success(`${DetailsTexts.NOTIFY_SUCCESS} ${this.joke.Id}`);
         } else {
-            this.notificationService.failure(`Unfortunately we could not fetch data, please try to pick another category`);
+            this.notificationService.failure(DetailsTexts.NOTIFY_FAILURE_FETCH_DATA);
             this.returnToCategories();
         }
     }
