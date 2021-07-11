@@ -1,4 +1,5 @@
-import { Categories, Category } from '../models/categories.model';
+import { Categories } from '../models/categories.model';
+import { Category } from '../models/category.model';
 
 export class CoreCategoriesMapper {
     StringsArrayToCategories(categoriesResult: string[]): Categories {

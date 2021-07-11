@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Category } from '../../models/categories.model';
+import { Category } from '../../models/category.model';
 import { Observable, Subscription } from 'rxjs';
 import { DataSharedService } from '../../services/data-shared.service';
 import { IJokesService } from '../../interfaces/jokes.interface';
 import { Joke } from '../../models/joke.model';
-import { switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification-bar/notification.service';
 
@@ -31,6 +31,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     getRandomJoke(): void {
         this.observableSwitchMap = this.dataSharedService.currentMessage.pipe(
+            distinctUntilChanged(),
             switchMap((category: Category) => this.JokesService.getRandomJokeBy(category)));
 
         this.subscription$ = this.observableSwitchMap.subscribe((result: Joke) => this.fetchJoke(result),

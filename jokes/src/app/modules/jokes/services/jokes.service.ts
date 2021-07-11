@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Categories, Category } from '../models/categories.model';
+import { Categories } from '../models/categories.model';
 import { Joke } from '../models/joke.model';
 import { IJokesService } from '../interfaces/jokes.interface';
 import { CoreCategoriesMapper } from '../mappers/categories.mapper';
+import { Category } from '../models/category.model';
 
 @Injectable({
     providedIn: 'root'

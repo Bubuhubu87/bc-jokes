@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { Categories, Category } from '../../models/categories.model';
+import { Categories } from '../../models/categories.model';
 import { DataSharedService } from '../../services/data-shared.service';
 import { NotificationService } from '../notification-bar/notification.service';
 import { IJokesService } from '../../interfaces/jokes.interface';
 import { Router } from '@angular/router';
 import { CacheService } from '../../services/cache.service';
+import { Category } from '../../models/category.model';
 
 @Component({
     selector: 'app-categories',
