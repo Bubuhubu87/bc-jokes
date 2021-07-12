@@ -25,7 +25,7 @@ export class JokesService implements IJokesService {
     }
 
     getRandomJokeBy(categoryName: Category): Observable<Joke> {
-        const url = [this.apiBaseUrl, 'jokes/random?category=' + categoryName.Name].url();
+        const url = [this.apiBaseUrl, 'jokes/random?category=' + categoryName.name].url();
         return this.http.get<Joke>(url)
             .pipe(map((result: any) =>
                 new Joke(result.icon_url, result.id, result.url, result.value)));

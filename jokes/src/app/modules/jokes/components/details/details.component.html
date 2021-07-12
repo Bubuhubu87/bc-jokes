@@ -4,9 +4,9 @@
             aria-label="Left Align">&#8592;</button>
     </nav>
     <div class="content" *ngIf='joke'>
-        <section><img [src]='joke.IconUrl' /></section>
+        <section><img [src]='joke.iconUrl' /></section>
         <hr>
-        <article class="joke-text">{{joke.Value}}</article>
+        <article class="joke-text">{{joke.value}}</article>
         <button type="button" class="btn btn-default btn-primary mobile-button custom-button" (click)="getRandomJoke()"
             aria-label="get another joke">Another one</button>
     </div>

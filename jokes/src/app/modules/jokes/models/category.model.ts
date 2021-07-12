@@ -1,6 +1,6 @@
 export class Category {
-    Name: string;
+    name: string;
     constructor(name: string) {
-        this.Name = name;
+        this.name = name;
     }
 }

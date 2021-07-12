@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { DataSharedService } from '../../services/data-shared.service';
 import { IJokesService } from '../../interfaces/jokes.interface';
 import { Joke } from '../../models/joke.model';
-import { distinctUntilChanged, first, switchMap } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification-bar/notification.service';
 import { DetailsTexts } from '../../const_strings/details.text';
@@ -54,7 +54,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private fetchJoke(joke: Joke): void {
         if (joke) {
             this.joke = joke;
-            this.notificationService.success(`${DetailsTexts.NOTIFY_SUCCESS} ${this.joke.Id}`);
+            this.notificationService.success(`${DetailsTexts.NOTIFY_SUCCESS} ${this.joke.id}`);
         } else {
             this.notificationService.failure(DetailsTexts.NOTIFY_FAILURE_FETCH_DATA);
             this.returnToCategories();

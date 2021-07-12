@@ -1,9 +1,9 @@
 import { Category } from './category.model';
 
 export class Categories {
-    Categories: Category[] = [];
+    categories: Category[] = [];
 
     constructor(category: Category[]) {
-        this.Categories = category;
+        this.categories = category;
     }
 }

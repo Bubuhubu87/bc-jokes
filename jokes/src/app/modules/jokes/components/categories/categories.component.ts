@@ -50,8 +50,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
     private fetchCategories(categories: Categories): void {
         if (categories) {
-            this.categories = categories.Categories;
-            this.cacheService.setObjectCache(CategoriesTexts.CATEGORIES, categories.Categories);
+            this.categories = categories.categories;
+            this.cacheService.setObjectCache(CategoriesTexts.CATEGORIES, categories.categories);
             this.notificationService.success(CategoriesTexts.NOTIFY_SUCCESS);
         } else {
             this.notificationService.failure(CategoriesTexts.NOTIFY_FAILURE_FETCH_DATA);

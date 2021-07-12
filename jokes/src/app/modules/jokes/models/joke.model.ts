@@ -1,13 +1,13 @@
 export class Joke {
-    IconUrl: string;
-    Id: number;
-    Url: string;
-    Value: string;
+    iconUrl: string;
+    id: number;
+    url: string;
+    value: string;
 
     constructor(iconUrl: string, id: number, url: string, value: string) {
-        this.IconUrl = iconUrl;
-        this.Id = id;
-        this.Url = url;
-        this.Value = value;
+        this.iconUrl = iconUrl;
+        this.id = id;
+        this.url = url;
+        this.value = value;
     }
 }
