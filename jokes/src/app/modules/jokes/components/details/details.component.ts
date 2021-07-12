@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { DataSharedService } from '../../services/data-shared.service';
 import { IJokesService } from '../../interfaces/jokes.interface';
 import { Joke } from '../../models/joke.model';
-import { distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, first, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification-bar/notification.service';
 import { DetailsTexts } from '../../const_strings/details.text';
@@ -25,18 +25,21 @@ export class DetailsComponent implements OnInit, OnDestroy {
     constructor(private JokesService: IJokesService,
         private dataSharedService: DataSharedService,
         private router: Router,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService) {
+        this.observableSwitchMap = this.dataSharedService.currentMessage.pipe(
+            first(),
+            switchMap((category: Category) => this.JokesService.getRandomJokeBy(category)));
+    }
 
     ngOnInit(): void {
         this.getRandomJoke();
     }
 
     getRandomJoke(): void {
-        this.observableSwitchMap = this.dataSharedService.currentMessage.pipe(
-            distinctUntilChanged(),
-            switchMap((category: Category) => this.JokesService.getRandomJokeBy(category)));
-
-        this.subscription$ = this.observableSwitchMap.subscribe((result: Joke) => this.fetchJoke(result),
+        this.subscription$ = this.observableSwitchMap.subscribe((result: Joke) => {
+            this.fetchJoke(result),
+                this.subscription$.unsubscribe();
+        },
             (error) => {
                 this.notificationService.failure(DetailsTexts.NOTIFY_FAILURE);
                 this.returnToCategories();
