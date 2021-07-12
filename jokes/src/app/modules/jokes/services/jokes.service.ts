@@ -7,25 +7,24 @@ import { Joke } from '../models/joke.model';
 import { IJokesService } from '../interfaces/jokes.interface';
 import { CoreCategoriesMapper } from '../mappers/categories.mapper';
 import { Category } from '../models/category.model';
+import { environment } from './../../../../environments/environment'
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class JokesService implements IJokesService {
-    private apiBaseUrl = 'https://api.chucknorris.io/';
-
     constructor(private http: HttpClient,
         private coreCategoriesMapper: CoreCategoriesMapper) { }
 
     getCategories(): Observable<Categories> {
-        const url = [this.apiBaseUrl, 'jokes/categories'].url();
+        const url = [environment.apiUrl, 'jokes/categories'].url();
         return this.http.get<Categories>(url)
             .pipe(map((result: any) => this.coreCategoriesMapper.StringsArrayToCategories(result)));
     }
 
     getRandomJokeBy(categoryName: Category): Observable<Joke> {
-        const url = [this.apiBaseUrl, 'jokes/random?category=' + categoryName.name].url();
+        const url = [environment.apiUrl, 'jokes/random?category=' + categoryName.name].url();
         return this.http.get<Joke>(url)
             .pipe(map((result: any) =>
                 new Joke(result.icon_url, result.id, result.url, result.value)));
