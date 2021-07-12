@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { Observable, Subscription } from 'rxjs';
 import { DataSharedService } from '../../services/data-shared.service';
-import { IJokesService } from '../../interfaces/jokes.interface';
+import { JokesInterface } from '../../interfaces/jokes.interface';
 import { Joke } from '../../models/joke.model';
 import { first, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     observableSwitchMap!: Observable<Joke>;
     private subscription$: Subscription = new Subscription;
 
-    constructor(private JokesService: IJokesService,
+    constructor(private JokesService: JokesInterface,
         private dataSharedService: DataSharedService,
         private router: Router,
         private notificationService: NotificationService) {

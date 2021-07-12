@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Categories } from '../models/categories.model';
 import { Joke } from '../models/joke.model';
-import { IJokesService } from '../interfaces/jokes.interface';
+import { JokesInterface } from '../interfaces/jokes.interface';
 import { CoreCategoriesMapper } from '../mappers/categories.mapper';
 import { Category } from '../models/category.model';
 import { environment } from './../../../../environments/environment'
@@ -13,7 +13,7 @@ import { environment } from './../../../../environments/environment'
     providedIn: 'root'
 })
 
-export class JokesService implements IJokesService {
+export class JokesService implements JokesInterface {
     constructor(private http: HttpClient,
         private coreCategoriesMapper: CoreCategoriesMapper) { }
 

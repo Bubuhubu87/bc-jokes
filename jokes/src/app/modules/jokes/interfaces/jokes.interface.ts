@@ -9,7 +9,7 @@ import { JokesService } from '../services/jokes.service';
     providedIn: 'root',
     useClass: JokesService
 })
-export abstract class IJokesService {
+export abstract class JokesInterface {
     abstract getCategories(): Observable<Categories>;
     abstract getRandomJokeBy(categoryName: Category): Observable<Joke>;
 

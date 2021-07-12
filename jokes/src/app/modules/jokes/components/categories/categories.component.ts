@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { Categories } from '../../models/categories.model';
 import { DataSharedService } from '../../services/data-shared.service';
 import { NotificationService } from '../notification-bar/notification.service';
-import { IJokesService } from '../../interfaces/jokes.interface';
+import { JokesInterface } from '../../interfaces/jokes.interface';
 import { Router } from '@angular/router';
 import { CacheService } from '../../services/cache.service';
 import { Category } from '../../models/category.model';
@@ -20,7 +20,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     private subscription$: Subscription = new Subscription;
     categories: Category[] = [];
 
-    constructor(private JokesService: IJokesService,
+    constructor(private JokesService: JokesInterface,
         private dataSharedService: DataSharedService,
         private router: Router,
         private notificationService: NotificationService,
